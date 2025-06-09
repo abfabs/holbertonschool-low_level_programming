@@ -1,4 +1,4 @@
-#Low level programming
+# Low level programming
 
 This is the readme for the low level programmig project 
 
@@ -8,4 +8,4 @@ This is the readme for the low level programmig project
 * Exploring
 * Discovering
 
-[Link] (google.com)
+[Link](google.com)
