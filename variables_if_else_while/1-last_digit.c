@@ -1,12 +1,13 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
-/* more headers goes there */
 
 /**
- * main - Prints a text
+ * main - Entry point of the program.
  *
- * Return: Always 0 (Success)
+ * This function is the entry point for the program.
+ *
+ * Return: Always 0 (Success).
  */
 int main(void)
 {
@@ -15,8 +16,6 @@ int main(void)
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-
-	
 	ld = n % 10;
 
 	if (ld > 5)
@@ -27,5 +26,4 @@ int main(void)
 		printf("Last digit of %d is %d and is less than 6 and not 0\n", n, ld);
 
 	return (0);
-
 }
