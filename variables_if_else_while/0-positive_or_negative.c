@@ -4,7 +4,7 @@
 /* more headers goes there */
 
 /**
- * main - generates a random number
+ * main - Generate a random number
  *
  * Return: Always 0 (Success)
  */
