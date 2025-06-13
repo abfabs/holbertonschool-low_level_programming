@@ -5,7 +5,7 @@
  *
  * Return: Result
  */
-	int add(int x, int y)
+	int add(int num1, int num2)
 {
-return (x + y);
+	return (num1 + num2);
 }
