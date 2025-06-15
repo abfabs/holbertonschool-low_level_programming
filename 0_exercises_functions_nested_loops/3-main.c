@@ -3,8 +3,8 @@
 
 int main()
 {
-    calculateGrade(98);
+    char grade = calculateGrade(99);
 
-    printf("Your grade is %c\n", grade)
+    printf("Your grade is %c\n", grade);
     return 0;
 }
