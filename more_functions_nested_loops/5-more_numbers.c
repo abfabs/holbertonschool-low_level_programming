@@ -8,7 +8,7 @@
 void more_numbers(void)
 {
 	int i, j;
-	char buffer[151]; /* 15 numbers * 10 + 10 newlines = 150 chars + '\0' */
+	char buffer[151];
 	int pos = 0;
 
 	for (i = 0; i < 10; i++)

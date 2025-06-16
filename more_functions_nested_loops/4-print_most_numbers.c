@@ -8,7 +8,7 @@
 void print_most_numbers(void)
 {
 	char c;
-	char output[9]; /* 8 digits + newline */
+	char output[9]; 
 	int i = 0;
 	int j;
 

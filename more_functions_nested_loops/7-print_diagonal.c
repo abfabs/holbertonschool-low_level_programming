@@ -18,7 +18,6 @@ void print_diagonal(int n)
 
 	for (i = 0; i < n; i++)
 	{
-		/* Print spaces before the '\' */
 		for (j = 0; j < i; j++)
 			_putchar(' ');
 

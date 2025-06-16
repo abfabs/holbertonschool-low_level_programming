@@ -19,11 +19,9 @@ void print_triangle(int size)
 
 	for (row = 1; row <= size; row++)
 	{
-		/* Print spaces before the '#' */
 		for (spaces = size - row; spaces > 0; spaces--)
 			_putchar(' ');
 
-		/* Print '#' characters */
 		for (col = 0; col < row; col++)
 			_putchar('#');
 
