@@ -1,4 +1,5 @@
 #include "main.h"
+#include "main.h"
 
 /**
  * print_triangle - Prints a triangle of '#' characters
