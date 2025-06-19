@@ -1,1 +1,1 @@
-int count_vowels(char *text);
+int is_palindrome(char *s);
