@@ -1,0 +1,2 @@
+Functions with Arrays
+This document provides a set of exercises that practice using functions and array manipulation. Each task involves writing a function that works with arrays, designed to help beginners understand how to handle arrays in C step by step.
