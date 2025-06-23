@@ -10,3 +10,8 @@ int add(int a, int b);
 int square(int n);
 
 void pointer_example(void);
+void pointer_dereference(void);
+void check_null_pointer(void);
+void array(void);
+void access_and_modify_array(void);
+void sum_array(void);
