@@ -6,3 +6,7 @@ void loop_with_break(void);
 void infinite_loop(void);
 void greet(void);
 int add(int a, int b);
+
+int square(int n);
+
+void pointer_example(void);
