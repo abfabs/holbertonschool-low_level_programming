@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    print_numberstoten();
+    print_numbers();
     return 0;
 }

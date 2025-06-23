@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "main.h"
 
-void print_numberstoten(void)
+void print_numbers(void)
 {
     for (int i = 1; i <= 5; i++)
     {
