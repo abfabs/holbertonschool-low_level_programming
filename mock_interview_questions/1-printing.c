@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "main.h"
 
-int main(void)
+void print_variables(void)
 {
     int age = 25;
     float height = 1.74;
@@ -11,6 +12,4 @@ int main(void)
     printf("Height: %.2f m\n", height);
     printf("Grade: %c\n", grade);
     printf("Name: %s\n", name);
-
-    return 0;
 }
