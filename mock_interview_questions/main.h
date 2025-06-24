@@ -19,7 +19,7 @@ void print_array(int *ptr, int size);
 double average(int *arr, int size);
 void print_string(char *str);
 
-
+int my_strlen(char *str);
 
 
 void play_number_guessing();
