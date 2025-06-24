@@ -16,8 +16,8 @@ void array(void);
 void access_and_modify_array(void);
 void sum_array(void);
 void print_array(int *ptr, int size);
-
-
+double average(int *arr, int size);
+void print_string(char *str);
 
 
 
