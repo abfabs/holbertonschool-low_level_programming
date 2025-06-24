@@ -20,6 +20,6 @@ double average(int *arr, int size);
 void print_string(char *str);
 
 int my_strlen(char *str);
-
+void my_strcat(char *dest, const char *src);
 
 void play_number_guessing();
