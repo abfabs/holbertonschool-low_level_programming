@@ -5,13 +5,13 @@
 
 void play_number_guessing() {
     int secret, guess, tries = 0;
-    const int MAX_TRIES = 7;
+    const int MAX_TRIES = 10;
     
     srand(time(NULL));
-    secret = rand() % 100 + 1; // Secret number between 1 and 100
+    secret = rand() % 1000 + 1; // Secret number between 1 and 100
 
     printf("\n--- Number Guessing Game ---\n");
-    printf("I'm thinking of a number between 1 and 100.\n");
+    printf("I'm thinking of a number between 1 and 1000.\n");
     printf("You have %d tries to guess it!\n", MAX_TRIES);
 
     while (tries < MAX_TRIES) {
