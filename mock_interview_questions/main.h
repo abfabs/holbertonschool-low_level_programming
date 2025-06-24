@@ -15,7 +15,7 @@ void check_null_pointer(void);
 void array(void);
 void access_and_modify_array(void);
 void sum_array(void);
-
+void print_array(int *ptr, int size);
 
 
 
