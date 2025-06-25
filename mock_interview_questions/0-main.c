@@ -8,6 +8,7 @@ int main() {
     do {
         printf("=== Mini Arcade ===\n");
         printf("1. Number Guessing Game\n");
+        printf("2. Rock Paper Scissors\n");
         printf("0. Exit\n");
         printf("Choose a game: ");
         scanf("%d", &choice);
