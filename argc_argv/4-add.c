@@ -1,37 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int is_number(char *s)
-{
-	int i = 0;
-
-	if (s[0] == '\0')
-		return (0);
-
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
+/**
+ * main - Adds positive numbers passed as arguments
+ * @argc: Argument count
+ * @argv: Argument vector
+ *
+ * Return: 0 if successful, 1 if an argument is not a number
+ */
 int main(int argc, char *argv[])
 {
-	int i;
-    int sum = 0;
+	int i, j;
+	int sum = 0;
+
+	if (argc < 2)
+	{
+		printf("0\n");
+		return (1);
+	}
 
 	for (i = 1; i < argc; i++)
 	{
-		if (is_number(argv[i]) == 0)
+		for (j = 0; argv[i][j] != '\0'; j++)
 		{
-			printf("Error\n");
-			return (1);
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+			{
+				printf("Error\n");
+				return (1);
+			}
 		}
 		sum = sum + atoi(argv[i]);
 	}
 
 	printf("%d\n", sum);
+
 	return (0);
 }
