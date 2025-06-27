@@ -14,9 +14,9 @@ void pointer_dereference(void);
 void check_null_pointer(void);
 void array(void);
 void access_and_modify_array(void);
-void sum_array(void);
+int sum_array(int *numbers, int size);
 void print_array(int *ptr, int size);
-double average(int *arr, int size);
+float average(int *arr, int size);
 void print_string(char *str);
 
 int my_strlen(char *str);

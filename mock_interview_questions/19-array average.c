@@ -1,14 +1,15 @@
-double average(int *arr, int size)
+float average(int *arr, int size)
 {
     int sum = 0;
-    int *ptr = arr;
-    int *end = arr + size;
+    float average;
+    int i = 0;
 
-    while (ptr < end)
+    while (i < size)
     {
-        sum = sum + *ptr;
-        ptr++;
+       sum = sum + arr[i];
+       i++;
     }
+    average = (float)sum / (float)size;
 
-    return (double)sum / size;
+    return average;
 }

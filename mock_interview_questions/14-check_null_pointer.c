@@ -3,7 +3,7 @@
 
 void check_null_pointer(void)
 {
-    int *ptr = NULL;
+    int *ptr;
 
     if (ptr == NULL)
     {

@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include "main.h"
 
-void sum_array(void)
+int sum_array(int *numbers, int size)
 {
-    int numbers[] = {1, 2, 3, 4, 5};
-    int size = sizeof(numbers) / sizeof(numbers[0]);
+    int i;
     int sum = 0;
 
-    for (int i = 0; i < size; i++)
+    for (i = 0; i < size; i++)
     {
         sum = sum + numbers[i];
     }
 
-    printf("Sum of array elements: %d\n", sum);
+    return sum;
 }
