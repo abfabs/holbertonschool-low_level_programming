@@ -3,11 +3,9 @@
 
 typedef struct 
 {
-
     char name[100];
     int accountNumber;
     float balance;
-
 } BankClient;
 
 void viewBalance(BankClient clients[], int size, int accountNumber);
