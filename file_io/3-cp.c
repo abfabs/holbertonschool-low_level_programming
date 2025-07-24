@@ -27,10 +27,10 @@ void closefd(int fd1, int fd2)
 }
 
 /**
- * copy_file - Reads from fdr and writes to fdw.
- * @fdr: File descriptor for source file.
- * @fdw: File descriptor for destination file.
- * @argv: Argument vector (for error messages).
+ * copy_file - Copies content from source to destination.
+ * @fdr: Source file descriptor.
+ * @fdw: Destination file descriptor.
+ * @argv: Argument vector for error printing.
  */
 void copy_file(int fdr, int fdw, char *argv[])
 {
@@ -47,6 +47,7 @@ void copy_file(int fdr, int fdw, char *argv[])
 			exit(99);
 		}
 	}
+
 	if (n_read == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
@@ -56,7 +57,7 @@ void copy_file(int fdr, int fdw, char *argv[])
 }
 
 /**
- * main - Entry point. Validates args, opens files, and copies contents.
+ * main - Entry point. Handles argument checking and file operations.
  * @argc: Argument count.
  * @argv: Argument vector.
  * Return: 0 on success.
