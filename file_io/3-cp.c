@@ -1,36 +1,41 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 
-#define BUFFER_SIZE 1024
+#define BUF_SIZE 1024
 
 /**
- * print_error - prints an error message and exits with a given code.
- * @exit_code: exit status code.
- * @format: format string.
- * @arg: argument to format string.
+ * print_error - Prints an error message to STDERR and exits with code.
+ * @exit_code: Code to exit with.
+ * @msg: Error message to print.
+ * @arg: Additional string (usually filename or fd).
  */
-void print_error(int exit_code, const char *format, const char *arg)
+void print_error(int exit_code, const char *msg, const char *arg)
 {
-	dprintf(STDERR_FILENO, format, arg);
+	dprintf(STDERR_FILENO, msg, arg);
 	exit(exit_code);
 }
 
 /**
- * main - copies content of one file to another.
- * @argc: number of arguments.
- * @argv: argument values.
- * Return: 0 on success, or exits with relevant error code.
+ * main - Copies content from one file to another.
+ * @argc: Argument count.
+ * @argv: Argument vector.
+ * Return: 0 on success, exits with relevant codes on failure.
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to, r_bytes, w_bytes;
-	char buffer[BUFFER_SIZE];
+	int fd_from, fd_to;
+	ssize_t r, w;
+	char buf[BUF_SIZE];
 
 	if (argc != 3)
-		print_error(97, "Usage: cp %s %s\n", "file_from file_to");
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
 
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
@@ -43,18 +48,17 @@ int main(int argc, char *argv[])
 		print_error(99, "Error: Can't write to %s\n", argv[2]);
 	}
 
-	while ((r_bytes = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	while ((r = read(fd_from, buf, BUF_SIZE)) > 0)
 	{
-		w_bytes = write(fd_to, buffer, r_bytes);
-		if (w_bytes != r_bytes)
+		w = write(fd_to, buf, r);
+		if (w != r)
 		{
 			close(fd_from);
 			close(fd_to);
 			print_error(99, "Error: Can't write to %s\n", argv[2]);
 		}
 	}
-
-	if (r_bytes == -1)
+	if (r == -1)
 	{
 		close(fd_from);
 		close(fd_to);
@@ -62,10 +66,9 @@ int main(int argc, char *argv[])
 	}
 
 	if (close(fd_from) == -1)
-		print_error(100, "Error: Can't close fd %d\n", argv[1]);
-
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from), exit(100);
 	if (close(fd_to) == -1)
-		print_error(100, "Error: Can't close fd %d\n", argv[2]);
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to), exit(100);
 
 	return (0);
 }
