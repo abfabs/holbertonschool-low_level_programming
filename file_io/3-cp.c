@@ -37,8 +37,7 @@ void copy_file(int fdr, int fdw, char *argv[])
 	char buffer[BUFFER_SIZE];
 	ssize_t n_read, n_written;
 
-	n_read = read(fdr, buffer, BUFFER_SIZE);
-	while (n_read > 0)
+	while ((n_read = read(fdr, buffer, BUFFER_SIZE)) > 0)
 	{
 		n_written = write(fdw, buffer, n_read);
 		if (n_written == -1)
@@ -47,7 +46,6 @@ void copy_file(int fdr, int fdw, char *argv[])
 			closefd(fdr, fdw);
 			exit(99);
 		}
-		n_read = read(fdr, buffer, BUFFER_SIZE);
 	}
 	if (n_read == -1)
 	{
