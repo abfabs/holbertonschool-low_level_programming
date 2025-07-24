@@ -7,11 +7,6 @@
 
 #define BUFFER_SIZE 1024
 
-/**
- * closefd - closes file descriptors
- * @fd1: first file
- * @fd2: second file
- */
 void closefd(int fd1, int fd2)
 {
 	if (close(fd1) == -1)
@@ -26,12 +21,6 @@ void closefd(int fd1, int fd2)
 	}
 }
 
-/**
- * main - Entry point
- * @argc: number of arguments
- * @argv: argument array
- * Return: 0 on success, exits otherwise
- */
 int main(int argc, char *argv[])
 {
 	int fdr, fdw, n_read, n_write;
@@ -50,26 +39,17 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
+	/* ✅ Only open fdw *after* confirming fdr succeeded */
 	fdw = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fdw == -1)
 	{
-		close(fdr);
 		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		close(fdr); /* Good practice */
 		exit(99);
 	}
 
-	while (1)
+	while ((n_read = read(fdr, buffer, BUFFER_SIZE)) > 0)
 	{
-		n_read = read(fdr, buffer, BUFFER_SIZE);
-		if (n_read == -1)
-		{
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-			closefd(fdr, fdw);
-			exit(98);
-		}
-		if (n_read == 0)
-			break; /* end of file */
-
 		n_write = write(fdw, buffer, n_read);
 		if (n_write == -1 || n_write != n_read)
 		{
@@ -77,6 +57,12 @@ int main(int argc, char *argv[])
 			closefd(fdr, fdw);
 			exit(99);
 		}
+	}
+	if (n_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		closefd(fdr, fdw);
+		exit(98);
 	}
 
 	closefd(fdr, fdw);
