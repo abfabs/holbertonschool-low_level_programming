@@ -3,13 +3,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#define BUF_SIZE 1024
+#define BUFFER_SIZE 1024
 
 /**
- * print_error - Prints error message to stderr and exits with a code.
- * @exit_code: The exit code.
- * @format: Format string for error message.
- * @arg: Argument for the format string.
+ * print_error - Prints an error message to stderr and exits.
+ * @exit_code: The exit code to use.
+ * @format: The format string for the error message.
+ * @arg: Argument to format string (usually a filename or fd).
  */
 void print_error(int exit_code, const char *format, const char *arg)
 {
@@ -18,17 +18,17 @@ void print_error(int exit_code, const char *format, const char *arg)
 }
 
 /**
- * main - copies the content of a file to another file.
- * @argc: argument count.
- * @argv: argument vector.
+ * main - Copies the content of a file to another file.
+ * @argc: Number of arguments.
+ * @argv: Argument vector.
  *
- * Return: 0 on success, or exits with error codes.
+ * Return: 0 on success, exits with error code on failure.
  */
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
-	ssize_t r_bytes, w_bytes;
-	char buffer[BUF_SIZE];
+	ssize_t bytes_read, bytes_written;
+	char buffer[BUFFER_SIZE];
 
 	if (argc != 3)
 	{
@@ -47,10 +47,10 @@ int main(int argc, char *argv[])
 		print_error(99, "Error: Can't write to %s\n", argv[2]);
 	}
 
-	while ((r_bytes = read(fd_from, buffer, BUF_SIZE)) > 0)
+	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		w_bytes = write(fd_to, buffer, r_bytes);
-		if (w_bytes != r_bytes)
+		bytes_written = write(fd_to, buffer, bytes_read);
+		if (bytes_written != bytes_read)
 		{
 			close(fd_from);
 			close(fd_to);
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (r_bytes == -1)
+	if (bytes_read == -1)
 	{
 		close(fd_from);
 		close(fd_to);
