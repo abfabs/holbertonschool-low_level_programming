@@ -5,10 +5,6 @@
 
 #define BUFFER_SIZE 1024
 
-/**
- * close_file - Closes a file descriptor, prints error if it fails
- * @fd: File descriptor to close
- */
 void close_file(int fd)
 {
 	if (close(fd) == -1)
@@ -18,13 +14,6 @@ void close_file(int fd)
 	}
 }
 
-/**
- * main - Entry point to copy content from file_from to file_to
- * @argc: Argument count
- * @argv: Argument vector
- *
- * Return: 0 on success, otherwise exits with specific code
- */
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
@@ -52,24 +41,27 @@ int main(int argc, char *argv[])
 		exit(99);
 	}
 
-	while ((n_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	while (1)
 	{
+		n_read = read(fd_from, buffer, BUFFER_SIZE);
+		if (n_read == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			close_file(fd_from);
+			close_file(fd_to);
+			exit(98);
+		}
+		if (n_read == 0)
+			break;
+
 		n_written = write(fd_to, buffer, n_read);
-		if (n_written != n_read)
+		if (n_written == -1 || n_written != n_read)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			close_file(fd_from);
 			close_file(fd_to);
 			exit(99);
 		}
-	}
-
-	if (n_read == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		close_file(fd_from);
-		close_file(fd_to);
-		exit(98);
 	}
 
 	close_file(fd_from);
