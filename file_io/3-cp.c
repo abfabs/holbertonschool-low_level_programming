@@ -7,38 +7,36 @@
 #define BUFFER_SIZE 1024
 
 /**
- * print_error - Print error message to stderr and exit with code.
- * @code: Exit code.
- * @format: Error format string.
- * @arg: Argument for the format string.
+ * print_error - prints an error message and exits with a given code.
+ * @exit_code: exit status code.
+ * @format: format string.
+ * @arg: argument to format string.
  */
-void print_error(int code, const char *format, const char *arg)
+void print_error(int exit_code, const char *format, const char *arg)
 {
 	dprintf(STDERR_FILENO, format, arg);
-	exit(code);
+	exit(exit_code);
 }
 
 /**
- * main - Copy the content of one file to another.
- * @argc: Number of arguments.
- * @argv: Array of argument strings.
- *
- * Return: 0 on success, exits with codes on failure.
+ * main - copies content of one file to another.
+ * @argc: number of arguments.
+ * @argv: argument values.
+ * Return: 0 on success, or exits with relevant error code.
  */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to;
-	ssize_t r_bytes, w_bytes;
+	int fd_from, fd_to, r_bytes, w_bytes;
 	char buffer[BUFFER_SIZE];
 
 	if (argc != 3)
-		print_error(97, "Usage: cp file_from file_to\n", "");
+		print_error(97, "Usage: cp %s %s\n", "file_from file_to");
 
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
 		print_error(98, "Error: Can't read from file %s\n", argv[1]);
 
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
 		close(fd_from);
